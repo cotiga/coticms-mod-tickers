@@ -1,8 +1,5 @@
-@props(['limit' => 80])
-
 @php
     use Cotiga\ModuleTickers\Models\Ticker;
-    use Illuminate\Support\Str;
 
     /** @var \Illuminate\Support\Collection<int,\Cotiga\ModuleTickers\Models\Ticker> $tickers */
     $tickers = Ticker::online()->get();
@@ -20,9 +17,9 @@
             @foreach ($tickers as $t)
                 <span class="coti-ticker__item">
                     @if ($t->lien)
-                        <a href="{{ $t->lien }}">{{ Str::limit($t->texte, $limit) }}</a>
+                        <a href="{{ $t->lien }}">{!! $t->texte !!}</a>
                     @else
-                        {{ Str::limit($t->texte, $limit) }}
+                        {!! $t->texte !!}
                     @endif
                 </span>
             @endforeach
@@ -30,9 +27,9 @@
             @foreach ($tickers as $t)
                 <span class="coti-ticker__item" aria-hidden="true">
                     @if ($t->lien)
-                        <a href="{{ $t->lien }}" tabindex="-1">{{ Str::limit($t->texte, $limit) }}</a>
+                        <a href="{{ $t->lien }}" tabindex="-1">{!! $t->texte !!}</a>
                     @else
-                        {{ Str::limit($t->texte, $limit) }}
+                        {!! $t->texte !!}
                     @endif
                 </span>
             @endforeach
