@@ -1,44 +1,18 @@
+/* Bandeau défilant — structure (le défilement est piloté en JS : transform).
+   Couleurs/typo à personnaliser côté projet (.coti-ticker { background … }). */
 .coti-ticker {
     overflow: hidden;
     white-space: nowrap;
-    background: var(--bs-primary, #0d6efd);
+    background: var(--bs-dark, #212529);
     color: #fff;
 }
 
-.coti-ticker__track {
-    display: inline-block;
-    padding-block: 0.45rem;
-    animation: coti-ticker-scroll 30s linear infinite;
-    will-change: transform;
-}
-
-.coti-ticker:hover .coti-ticker__track {
-    animation-play-state: paused;
-}
-
 .coti-ticker__item {
-    padding-inline: 1.5rem;
+    padding-inline: 2rem;
     font-weight: 500;
 }
 
 .coti-ticker__item a {
     color: inherit;
-    text-decoration: none;
-}
-
-.coti-ticker__item a:hover,
-.coti-ticker__item a:focus {
     text-decoration: underline;
-}
-
-@keyframes coti-ticker-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .coti-ticker__track {
-        animation: none;
-        white-space: normal;
-    }
 }
