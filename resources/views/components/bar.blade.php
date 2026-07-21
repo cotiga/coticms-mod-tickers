@@ -8,12 +8,6 @@
 @endphp
 
 @if ($tickers->isNotEmpty())
-    @once
-        @push('styles')
-            <link rel="stylesheet" href="{{ asset('vendor/module-tickers/module-tickers.css') }}">
-        @endpush
-    @endonce
-
     <div {{ $attributes->merge(['class' => 'coti-ticker']) }} data-speed="{{ $speed }}" data-pausable="true" role="region" aria-label="Annonces">
         <div class="coti-ticker__content">
             @foreach ($tickers as $t)

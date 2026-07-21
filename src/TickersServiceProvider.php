@@ -20,6 +20,16 @@ class TickersServiceProvider extends ServiceProvider
             @copy(__DIR__.'/../resources/dist/module-tickers.css', $css);
         }
 
+        // CSS du module chargé sur TOUTES les pages (barre en tête de site, etc.),
+        // où un @push('styles') local ne serait jamais exécuté.
+        try {
+            if ($this->app->bound('coti.css') && \Cotiga\CotiCmsCore\Models\ModuleSettings::get()->tickers_actif) {
+                $this->app->make('coti.css')->push(asset('vendor/module-tickers/module-tickers.css'));
+            }
+        } catch (\Exception $e) {
+            // Table modules pas encore migrée
+        }
+
         // <x-tickers::bar /> → resources/views/components/bar.blade.php
         Blade::anonymousComponentNamespace('tickers::components', 'tickers');
     }
