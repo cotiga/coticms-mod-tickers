@@ -1,17 +1,17 @@
 @props(['speed' => '0.5'])
 
 @php
-    use Cotiga\ModuleTickers\Models\Ticker;
+    use Cotiga\ModuleTickers\Support\TickerSource;
 
-    /** @var \Illuminate\Support\Collection<int,\Cotiga\ModuleTickers\Models\Ticker> $tickers */
-    $tickers = Ticker::online()->get();
+    /** Fragments HTML déjà échappés : annonces saisies et/ou événements à venir. */
+    $items = TickerSource::items();
 @endphp
 
-@if ($tickers->isNotEmpty())
+@if ($items->isNotEmpty())
     <div {{ $attributes->merge(['class' => 'coti-ticker']) }} data-speed="{{ $speed }}" data-pausable="true" role="region" aria-label="Annonces">
         <div class="coti-ticker__content">
-            @foreach ($tickers as $t)
-                <span class="coti-ticker__item">@if ($t->lien)<a href="{{ $t->lien }}">{!! $t->texte !!}</a>@else{!! $t->texte !!}@endif</span>
+            @foreach ($items as $item)
+                <span class="coti-ticker__item">{!! $item !!}</span>
             @endforeach
         </div>
     </div>
