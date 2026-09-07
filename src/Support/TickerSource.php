@@ -29,7 +29,15 @@ class TickerSource
     /** Fragments HTML prêts à défiler, dans l'ordre d'affichage. */
     public static function items(): Collection
     {
-        $source = ModuleSettings::get()->ticker_source ?: 'tickers';
+        $reglages = ModuleSettings::get();
+
+        // Module coupé : rien à défiler. La garde est ici, une fois pour toutes, plutôt
+        // que dans un @if recopié par chaque vue qui pose le bandeau.
+        if (! $reglages->tickers_actif) {
+            return collect();
+        }
+
+        $source = $reglages->ticker_source ?: 'tickers';
 
         $items = collect();
 
