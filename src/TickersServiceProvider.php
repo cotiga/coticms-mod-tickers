@@ -27,5 +27,21 @@ class TickersServiceProvider extends ServiceProvider
 
         // <x-tickers::bar /> → resources/views/components/bar.blade.php
         Blade::anonymousComponentNamespace('tickers::components', 'tickers');
+
+        // Déclaration au socle : activer le module suffit à voir le bandeau, aucune
+        // vue de projet à modifier. Emplacement et portée réglables en admin.
+        try {
+            if (\Cotiga\CotiCmsCore\Models\ModuleSettings::get()->tickers_actif) {
+                \Cotiga\CotiCmsCore\Support\Slots::register(
+                    key: 'tickers',
+                    view: 'tickers::inc.slot',
+                    label: 'Bandeau d\'annonces défilantes',
+                    zone: 'haut-de-page',
+                    scope: 'accueil',
+                );
+            }
+        } catch (\Exception $e) {
+            // Table modules pas encore migrée
+        }
     }
 }
