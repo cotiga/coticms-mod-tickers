@@ -32,7 +32,7 @@ class TickersServiceProvider extends ServiceProvider
             \Cotiga\CotiCmsCore\Support\Slots::register(
                 key: 'tickers',
                 view: 'tickers::inc.slot',
-                label: 'Bandeau d\'annonces défilantes',
+                label: 'Tickers — bandeau d\'annonces défilantes',
                 zone: 'haut-de-page',
                 scope: 'accueil',
             );
