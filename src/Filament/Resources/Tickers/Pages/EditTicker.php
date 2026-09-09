@@ -2,11 +2,11 @@
 
 namespace Cotiga\ModuleTickers\Filament\Resources\Tickers\Pages;
 
+use Cotiga\CotiCmsCore\Filament\Pages\CotiEditRecord;
 use Cotiga\ModuleTickers\Filament\Resources\Tickers\TickerResource;
 use Filament\Actions\DeleteAction;
-use Filament\Resources\Pages\EditRecord;
 
-class EditTicker extends EditRecord
+class EditTicker extends CotiEditRecord
 {
     protected static string $resource = TickerResource::class;
 
